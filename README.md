@@ -14,4 +14,4 @@ For being our first hackathon project, we are very proud of all that we have man
 ## What we learned
 We learned about full-stack app development (HTML CSS JS Flask Python C++), IoT, Networking, Embedded Hardware and Software Integration. 
 ## What's next for PixelParty
-Due to the nature of the hackathon, we were only able to create one device, however, we envision this being a device that anyone can have set up in their rooms each with their own distinct URL and canvas so that each owner can have them and their friends contribute to its respective canvas.
+Due to the nature of the hackathon, we were only able to create one device, however, we envision this being a device that anyone can have set up in their rooms each with their own distinct URL and canvas so that each owner can have them and their friends contribute to its respective canvas. We additionally want to make more reliable usage of the board over internet with improved client and server code to make internet interactions more reliable. Lastly, we'd like add more features, like canvas saving and uploading, as well as other features like games.
