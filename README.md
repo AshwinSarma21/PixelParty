@@ -1,6 +1,10 @@
 # PixelParty
 Pixel Party
 
+Launch app by running `sudo python -m app`. 
+
+Requires python binding modules in https://github.com/hzeller/rpi-rgb-led-matrix
+
 ## Inspiration
 We've always wanted to have something to put in a room that not only could serve as a dynamic programmable display piece, but also one that lets us connect with friends at any distance. The PixelParty interactive LED matrix allows you and your friends to draw anything you want and see every digital brush stroke in real time on a physical panel. The PixelParty offers a way to make online interactions feel more physically present, and also a fun creative activity for friends hanging out in your room. 
 ## What it does
