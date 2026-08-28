@@ -5,6 +5,11 @@ import PixelCanvas from "./PixelCanvas";
 const SIZE = 64;
 const socket = io();
 
+console.log('check 1', socket.connected);
+socket.on('connect', function() {
+  console.log('check 2', socket.connected);
+});
+
 function createBlankCanvas() {
   return Array.from({ length: SIZE }, () =>
     Array.from({ length: SIZE }, () => "transparent")

@@ -14,6 +14,17 @@
                 ],
                 "projectType": "flask"
             }
+        },
+        {
+            "name": "Containers: Node.js Launch",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "docker-run: debug",
+            "platform": "node",
+            "node": {
+                "package": "${workspaceFolder}/frontend/package.json",
+                "localRoot": "${workspaceFolder}/frontend"
+            }
         }
     ]
 }

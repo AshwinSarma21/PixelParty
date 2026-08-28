@@ -4,12 +4,14 @@
 		{
 			"type": "docker-build",
 			"label": "docker-build",
-			"platform": "python",
+			"platform": "node",
 			"dockerBuild": {
-				"tag": "pixelparty:latest",
-				"dockerfile": "${workspaceFolder}/Dockerfile",
-				"context": "${workspaceFolder}",
+				"dockerfile": "${workspaceFolder}/frontend/Dockerfile",
+				"context": "${workspaceFolder}/frontend",
 				"pull": true
+			},
+			"node": {
+				"package": "${workspaceFolder}/frontend/package.json"
 			}
 		},
 		{
@@ -20,20 +22,24 @@
 			],
 			"dockerRun": {
 				"env": {
-					"FLASK_APP": "backend\\app.py"
+					"DEBUG": "*",
+					"NODE_ENV": "development"
 				}
 			},
-			"python": {
-				"args": [
-					"run",
-					"--no-debugger",
-					"--no-reload",
-					"--host",
-					"0.0.0.0",
-					"--port",
-					"5000"
-				],
-				"module": "flask"
+			"node": {
+				"package": "${workspaceFolder}/frontend/package.json",
+				"enableDebugging": true
+			}
+		},
+		{
+			"type": "docker-run",
+			"label": "docker-run: release",
+			"dependsOn": [
+				"docker-build"
+			],
+			"platform": "node",
+			"node": {
+				"package": "${workspaceFolder}/frontend/package.json"
 			}
 		}
 	]

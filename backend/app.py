@@ -1,9 +1,9 @@
-from flask import Flask, render_template, request
+from flask import Flask, request
 from flask_socketio import SocketIO, emit
 import threading
 import time
 #from rgbmatrix import RGBMatrix, RGBMatrixOptions
-from multiprocessing import Process,Queue,Pipe
+#from multiprocessing import Process,Queue,Pipe
 #from simplesquare import led_process
 from werkzeug.security import check_password_hash
 from db import init_db, get_db, load_latest_canvas_snapshot
@@ -17,8 +17,8 @@ PASSWORD_HASH = "scrypt:32768:8:1$pojiw4Dscz7rzJyW$c3a3be5ba670fec064de97de5c15a
 pixels = [["transparent" for _ in range(SIZE)] for _ in range(SIZE)]
 matrixPixels = [[(0,0,0) for _ in range(SIZE)] for _ in range(SIZE)]
 
-parent, child = Pipe()
-print("began process")
+#parent, child = Pipe()
+#print("began process")
 
 init_db()
 
@@ -93,7 +93,7 @@ def update_pixel():
     pixels[y][x] = color
 
     rgb = tuple(int(color.lstrip("#")[i:i+2], 16) for i in (0, 2, 4))
-    parent.send((x, y, rgb))
+    #parent.send((x, y, rgb))
 
     socketio.emit("pixel_update", {"x": x, "y": y, "color": color})
 
@@ -117,7 +117,7 @@ def clear_canvas():
     global pixels
     pixels = [["transparent" for _ in range(SIZE)] for _ in range(SIZE)]
 
-    parent.send((-1, 0, (0, 0, 0)))
+    #parent.send((-1, 0, (0, 0, 0)))
     socketio.emit("canvas_init", pixels)
 
     return {"ok": True}
@@ -200,7 +200,7 @@ def handle_pixel_update(data):
     color = data["color"]
     pixels[y][x] = color
     
-    parent.send((x,y,tuple(int(color.lstrip('#')[i:i+2], 16) for i in (0, 2, 4))))
+    #parent.send((x,y,tuple(int(color.lstrip('#')[i:i+2], 16) for i in (0, 2, 4))))
     
     # Send update to all other clients
     emit("pixel_update", data, broadcast=True, include_self=False)
@@ -217,7 +217,7 @@ def handle_clear_canvas_request(data):
         emit("clear_response", {"ok": True})
         
         #send info to the matrix process that we are clearing
-        parent.send((-1,0,(0,0,0)))
+        #parent.send((-1,0,(0,0,0)))
         
         print(f"[{sid}] cleared the canvas (password correct).")
     else:
